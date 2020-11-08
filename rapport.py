@@ -15,8 +15,7 @@ In this notebook you will train your first neural network. Feel free to look bac
 #### Install dependencies freeze by poetry
 """
 
-!python3 -m pip install --upgrade pip
-!python3 -m pip install !python3 -m pip install matplotlib numpy scikit-learn==0.23.2
+
 
 """#### Import the different module we will need in this notebook 
 
@@ -416,26 +415,36 @@ It will help us understand why the neural network failed sometimes to classify i
 """
 
 nsample = 1000
+
+
 X_demo = X_test[:nsample,:]
 y_demo = ffnn.forward_pass(X_demo)
-y_true = y_test[:nsample,:]
+y_true = y_test[:nsample]
 
 index_to_plot = 50 
+true_target = np.argmax(y_true[index_to_plot])
 plot_one_image(X_demo, y_true, index_to_plot)
+
 
 # Compare to the prediction 
 prediction = np.argmax(y_demo[index_to_plot,:])
-true_target = np.argmax(y_true[index_to_plot,:])
+print('prediction : ',prediction)
+true_target = int(y_true[index_to_plot])
+print('true target : ',true_target)
 
 # is it the same number ?
 
 # loop arround the demo test set and try to find a miss prediction
+
+i = 0
+find = 0
 for i in range(0, nsample):   
-    prediction = None # Todo
-    true_target = None # Todo
+    prediction = np.argmax(y_demo[i,:]) # Todo
+    true_target = int(y_true[i]) # Todo
+    i+=1
     if prediction != true_target:
-        # TODO
-        pass
+        find+=1
+print('Miss prediction : ',find, 'loops : ',i )
 
 """## Open analysis
 
@@ -452,4 +461,3 @@ Also explain how the neural network behave when changing them ?
 
 TODO
 """
-
