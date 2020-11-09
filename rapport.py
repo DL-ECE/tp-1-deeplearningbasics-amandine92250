@@ -399,9 +399,9 @@ To have all the point your neural network needs to have a Test accuracy > 92 % !
 
 minibatch_size = 5 
 nepoch = 10
-learning_rate = 0.01
+learning_rate = 0.025
 
-ffnn = FFNN(config=[784, 30, 30, 10], minibatch_size=minibatch_size, learning_rate=learning_rate)
+ffnn = FFNN(config=[784, 35, 35, 10], minibatch_size=minibatch_size, learning_rate=learning_rate)
 
 assert X_train.shape[0] % minibatch_size == 0
 assert X_test.shape[0] % minibatch_size == 0
@@ -461,4 +461,11 @@ Also explain how the neural network behave when changing them ?
 ## Open analysis answer
 
 TODO
+
+- minibatch_size : Sous-ensemble de l'ensemble d'apprentissage qui est utilisé pour controler la précision de l'estimation de l'" error gradient" lors de la formation du réseau.
+J'ai choisi une petite valeur pour ce paramètre car j'ai remarqué que cela permettait une convergence plus rapide.
+- nepoch : Nombre de passage complet de l'algorithme d'entraînement à travers l'ensemble de données. Généralement plus cette donnée est imortante, plus l'accuracy atteinte est bonne. Cependant il faut trouver un juste milieu car cela prend du temps. J'ai donc choisi de la fixer à 10.
+- config : La première donnée correspond à notre entrée qui est un vecteur 1x784. Notre dernière donnée corresond à notre sortie qui est un vecteur de taille 10. 
+J'ai donc seulement modifié les données se trouvant au milieu et correspondant au nombre de couches cachées. La valeur attribuée à chaque couche correspond au nombre de neurones dans cette dernière. Notre ensemble de données étant assez simple, j'ai décidé de n'en laisser que 2. En ce qui concerne le nombre de neurones dans chaque couches cachées, j'ai dans un premier temps mis un nombre très élevé qui a augmenté le tems nécessaire our entrainer le réseau. J'ai donc finalement ajusté cette donnée et l'ai mise à 35 pour les deux couches.
+- learning_rate : Contrôle dans quelle mesure le modèle doit être modifié en réponse à l'erreur estimée  chaque fois que les poids du modèle sont mis à jour. Il contrôle la rapidité avec laquelle le modèle est adapté au problème et est lié avec le nb d'époques : taux d'apprentissage  petits-> plus d'époques de formation car plus petits changements apportés aux poids à chaque mise à jour et inversement. Ainsi, un learning rate de 0.025 permet à mon modèle d'atteindre une accuracy correcte en 10epoch.
 """
