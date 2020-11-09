@@ -96,7 +96,8 @@ plot_one_image(X_test, y_test , 250)
 
 # It's important to normalize the data before feeding it into the neural network
 def normalize_data(dataset: np.array) -> np.array:
-    normalized_dataset = (dataset) /(np.max(dataset)) # convert from [0:255] to [0.:1.]
+    #normalized_dataset = (dataset) /(np.max(dataset)) # convert from [0:255] to [0.:1.]
+    normalized_dataset = dataset/255
     return normalized_dataset
 
 """It's also important to find a good representation of the target.
